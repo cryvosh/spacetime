@@ -435,70 +435,6 @@ function square(a) {
 	}
 }
 
-// function cos(a) {
-// 	let x = Array.isArray(a) ? a : [a,a];
-
-// 	if (x[0] < 0) {
-// 		let n = Math.ceil(-x[0] / (2*Math.PI));
-// 		x[0] += (2*Math.PI)*n;
-// 		x[1] += (2*Math.PI)*n;
-// 	}
-
-// 	if (Math.abs(x[1] - x[0] >= 2*Math.PI)) {
-// 		return [-1, 1];
-// 	}
-
-// 	// let k = sub(x, mult(2*Math.PI))
-
-// 	let cl = Math.cos(x[0]);
-// 	let cr = Math.cos(x[1]);
-
-// 	if (x[1])
-// }
-
-// function fractal(x, y, t) {
-// 	let cx = mult(t,-10);
-// 	let cy = 0.15;
-
-// 	// cx = -0.79;
-// 	// cy = 0.15;
-
-// 	// cx = 0;
-// 	// cy = 0;
-
-// 	let z = [x,y]
-// 	let len;
-
-// 	for (let i=0; i<1; i++) {
-// 		let next_z = [add(sub(square(z[0]), square(z[1])), cx), add(mult(square(z[0]), 2), cy)];
-// 		z = next_z;
-
-// 		//console.log(z);
-
-// 		len = sub((add(square(z[0]), square(z[1]))), 4);
-// 		//len[0] = Number.isNaN(len[0]) ? 0 : len[0];
-// 		if (len > 0 || len[0] > 0) {
-// 			break;
-// 		}
-// 	}
-
-// 	len = sub(add(square(z[0]), square(z[1])), 4);
-// 	//len[0] = Number.isNaN(len[0]) ? -Infinity : len[0];
-// 	return len;
-// }
-
-// function func(x, y, t) {
-// 	//return sub(add(mult(x,x), mult(y,y)), t);
-// 	return sub(add(square(x), square(y)), t);
-// }
-
-// function func2(x,y,t) {
-// 	x = add(x,1);
-// 	//x = sub(x,t);
-// 	y = add(y,1);
-// 	return sub(add(square(x), square(y)), 0.5);
-// }
-
 function sqrt(a) {
 	return [Math.sqrt(a[0]), Math.sqrt(a[1])];
 }
@@ -518,86 +454,41 @@ function box(x,y,center_x,center_y,width,height) {
 	return add(len, k);
 }
 
-// function func(x, y, t) {
-// 	//return func(x,y,t);
-// 	return min(func(x,y,t), func2(x,y,t));
-// }
-
-// function func(x, y, t) {
-// 	//return func(x,y,t);
-// 	// let c1 = circle(x,y,0,0,1);
-// 	// let c2 = circle(x,y,add(-2, t),2,1);
-
-// 	let c1 = circle(x,y,0,0,t);
-// 	let c2 = circle(x,y,sub(t,2),1,1);
-// 	let c3 = circle(x,y,2,-2,1,1);
-
-// 	return smin(smin(c1, c2), c3);
-// 	//return min(func(x,y,t), func2(sub(x,t),y,t));
-// }
-
-// function func(x, y, t) {
-// 	//return func(x,y,t);
-// 	// let c1 = circle(x,y,0,0,1);
-// 	// let c2 = circle(x,y,add(-2, t),2,1);
-
-// 	let c1 = circle(x,y,0,2,1);
-// 	let c2 = circle(x,y,sub(mult(t,3),2),0,1);
-// 	let c3 = circle(x,y,0,-2,1);
-
-// 	return smin(smin(c1, c2), c3);
-// 	//return min(func(x,y,t), func2(sub(x,t),y,t));
-// }
-
-// function func(x, y, t) {
-// 	//return func(x,y,t);
-// 	// let c1 = circle(x,y,0,0,1);
-// 	// let c2 = circle(x,y,add(-2, t),2,1);
-
-// 	let c1 = circle(x,y,-1.5,1.8,1);
-// 	let c2 = circle(x,y,1.5,1.8,1);
-// 	let c3 = circle(x,y,sub(mult(t,30),2),0,1);
-// 	let b1 = box(x,y,0,-1.5,1.5,0.7);
-
-// 	return smin(smin(smin(c1, c2), c3), b1);
-// 	//return min(func(x,y,t), func2(sub(x,t),y,t));
-// }
-
-// function func(x, y, t) {
+function func(x, y, t) {
 	
-// 	let c1 = circle(x,y,-1.5,1.8,1);
-// 	let c2 = circle(x,y,1.5,-1.8,1);
-// 	let b1 = box(x,y,1.5,1.8,1,1);
-// 	let b2 = box(x,y,-1.5,-1.8,1,1);
+	let c1 = circle(x,y,-1.5,1.8,1);
+	let c2 = circle(x,y,1.5,-1.8,1);
+	let b1 = box(x,y,1.5,1.8,1,1);
+	let b2 = box(x,y,-1.5,-1.8,1,1);
 
-// 	let c3 = circle(x,y,sub(mult(t,10),3),0,0.5);
+	let c3 = circle(x,y,sub(mult(t,10),3),0,0.5);
 	
-// 	// let c1 = circle(x,y,-1.5,1.8,1);
-// 	// let c2 = circle(x,y,1.5,1.8,1);
-// 	// let c3 = circle(x,y,sub(mult(t,30),2),0,1);
-// 	// let b1 = box(x,y,0,-1.5,1.5,0.7);
+	// let c1 = circle(x,y,-1.5,1.8,1);
+	// let c2 = circle(x,y,1.5,1.8,1);
+	// let c3 = circle(x,y,sub(mult(t,30),2),0,1);
+	// let b1 = box(x,y,0,-1.5,1.5,0.7);
 
-// 	return smin(min(min(c1,c2), min(b1, b2)), c3);
+	return smin(min(min(c1,c2), min(b1, b2)), c3);
 
-// 	return min(c1,min(c2,min(b1,min(b2))));
-// 	//return min(func(x,y,t), func2(sub(x,t),y,t));
-// }
+	return min(c1,min(c2,min(b1,min(b2))));
+	//return min(func(x,y,t), func2(sub(x,t),y,t));
+}
 
 // function func(x, y, t) {
 	
 // 	return circle(x,y,0,0,mult(t,1));
 // }
 
-function func(x, y, t) {
+// function func(x, y, t) {
 	
-	let c1 = circle(x,y,0,0,mult(t,1));
+// 	let c1 = circle(x,y,0,0,mult(t,1));
 
-	return c1;
+// 	return c1;
 
-	let c2 = circle(x,y,-1,1,1);
+// 	let c2 = circle(x,y,-1,1,1);
 
-	return min(c1,c2);
-}
+// 	return min(c1,c2);
+// }
 
 function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 	this.xmin = xmin;
@@ -825,7 +716,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 		}
 	}
 
-	this.eval_last_working = function(t, t_interval) {
+	this.eval1 = function(t, t_interval) {
 		if (!this.evaluated || t >= this.tmax) {
 			//this.change_t(t, t+this.max_lookahead*dt);
 
@@ -887,13 +778,13 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 
 				if (this.dx <= min_dx && this.dy <= min_dy) {
 
-					if (Math.abs(this.last_df-this.df) == 0) {
-						return this.filled;
-					}
+					// if (Math.abs(this.last_df-this.df) == 0) {
+					// 	return this.filled;
+					// }
 
 					if (this.dt > 0) {
 						this.change_t(t,t);
-						this.eval_last_working(t, [t,t]);
+						this.eval1(t, [t,t]);
 						//return this.filled;
 					} else {
 						this.filled = 0;
@@ -926,7 +817,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 			}
 		}
 		for (child of this.children) {
-			child.eval_last_working(t);
+			child.eval1(t);
 		}
 
 		return this.filled;
@@ -934,7 +825,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 
 	this.children_same_state = false;
 
-	this.eval = function(t, t_interval) {
+	this.eval_mods = function(t, t_interval) {
 
 		this.multiplier = Math.min(this.multiplier, 200);
 
@@ -1012,7 +903,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 					}
 					
 					if (test_t_interval[1] - test_t_interval[0] > dt) { // if time interval is large
-						this.filled = this.eval(t, [t,t]); // make it small and reevaluate
+						this.filled = this.eval_mods(t, [t,t]); // make it small and reevaluate
 					} else { // else
 						this.change_t(test_t_interval[0], test_t_interval[1]);
 						this.filled = 0;
@@ -1034,7 +925,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 						// 	this.filled = 0;
 						// }
 						this.multiplier = 1;
-						this.filled = this.eval(t, new_t); //hmm
+						this.filled = this.eval_mods(t, new_t); //hmm
 						return this.filled; // hmm
 					} else {
 						this.filled = state;
@@ -1072,7 +963,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 			let empty_children = 0;
 	
 			for (child of this.children) {
-				let child_state = child.eval(t);
+				let child_state = child.eval_mods(t);
 				if (child_state == 1) {
 					filled_children += 1;
 				} else if (child_state == -1) {
@@ -1116,8 +1007,8 @@ let dt = 0.001;
 let paused = false;
 var evaluations = 0;
 
-let min_dx = 0.01;
-let min_dy = 0.01;
+let min_dx = 0.1;
+let min_dy = 0.1;
 let x_scale = 50;
 
 let domain_regions = [
@@ -1170,11 +1061,11 @@ function draw() {
 		plots[0].data.push(evaluations);
 
 		evaluations = 0;
-		domain_regions[1].eval(t);
+		domain_regions[1].eval_mods(t);
 		plots[1].data.push(evaluations);
 
 		evaluations = 0;
-		domain_regions[2].eval_last_working(t);
+		domain_regions[2].eval1(t);
 		plots[2].data.push(evaluations);
 	}
 
