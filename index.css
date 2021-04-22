@@ -1,0 +1,27 @@
+* {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#divider {
+	height: 100vh;
+	width: 50px;
+	opacity: 0.2;
+	cursor: ew-resize;
+	position: absolute;
+	background-color: red;
+	transform: translateX(500px);
+}
+
+#canvas1 {
+	width: 20%;
+	height: 100vh;
+	position: absolute;
+}
+
+#canvas2 {
+	width: 20%;
+	height: 100vh;
+	position: absolute;
+}
