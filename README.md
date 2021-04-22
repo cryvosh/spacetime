@@ -3,6 +3,8 @@
 
 To run, simply open index.html in the latest version of Chrome.
 
+Note that min_dx and min_dy control the size of the smallest regions.
+
 **Controls:**
 * Numbers 1-3 change the visualization:
   * 1: Ground truth per-frame evaluation
@@ -12,7 +14,7 @@ To run, simply open index.html in the latest version of Chrome.
 * R to refresh page
 * Right click a region to print it to the console
   
-**Graph modifiers**
+**Graph modifiers:**
 
 Press F12 to open the developer console.
 
