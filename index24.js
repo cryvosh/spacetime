@@ -671,10 +671,10 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 		this.children = [];
 		evaluations += 1;
 
-		if (f[1] <= 0) {
+		if (f[1] < 0) {
 			this.filled = 1;
 			return;
-		} else if (0 <= f[0]) {
+		} else if (0 < f[0]) {
 			this.filled = -1;
 			return;
 		} else {
