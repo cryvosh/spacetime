@@ -182,7 +182,7 @@ function Canvas(canvas_element, zoom) {
 }
 
 let canvas1 = new Canvas(document.querySelector(`#canvas1`), 120);
-let canvas2 = new Canvas(document.querySelector(`#canvas2`), 0.1);
+let canvas2 = new Canvas(document.querySelector(`#canvas2`), 0.05);
 
 let divider = document.querySelector(`#divider`);
 let divider_ratio = 0.5;
@@ -293,6 +293,7 @@ window.addEventListener(`mousemove`, function(e) {
 	}
 });
 
+let longer_demo = false;
 
 let draw_mode = 1;
 window.addEventListener(`keydown`, function(e) {
@@ -307,6 +308,11 @@ window.addEventListener(`keydown`, function(e) {
 
 	if (e.code == `Space`) {
 		paused = !paused;
+	}
+
+	if (e.code == `KeyP`) {
+		longer_demo = !longer_demo;
+		domain_regions[2].reset();
 	}
 
 	// if (e.code == `ArrowRight`) {
@@ -707,53 +713,34 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 	this.multiplier = 1;
 
 	this.classify_f = function(f_interval) {
-		if (f_interval[1] <= 0) {
+		if (f_interval[1] < 0) {
 			return 1;
-		} else if (0 <= f_interval[0]) {
+		} else if (0 < f_interval[0]) {
 			return -1;
 		} else {
 			return 0;
 		}
 	}
 
+	this.reset = function() {
+		this.tmax = -1;
+		this.children = [];
+		this.last_df = -1;
+		this.last_df_time = -2;
+		this.change_f(0,0);
+	}
+
 	this.eval1 = function(t, t_interval) {
 		if (!this.evaluated || t >= this.tmax) {
-			//this.change_t(t, t+this.max_lookahead*dt);
-
-
-			// hmm this doesn't do well here since false positives split spatially
-			// let test_t_interval;
-			
-			// if (this.parent != undefined) {
-			// 	test_t_interval = t_interval === undefined ? [t,t+Math.random()*this.parent.df/2] : t_interval;	
-			// } else {
-			// 	test_t_interval = t_interval === undefined ? [t,t+100*Math.random()*this.max_lookahead*this.multiplier*dt] : t_interval;
-			// }
-			
-
-
 			let test_t_interval;
-			
-			// if (this.parent != undefined) {
-			// 	test_t_interval = t_interval == undefined ? [t,t+this.parent.dt*Math.random()*this.max_lookahead*dt] : t_interval;
-			// } else {
-			// 	test_t_interval = t_interval == undefined ? [t,t+100000000*Math.random()*this.max_lookahead*dt] : t_interval;
-			// }
-			test_t_interval = t_interval == undefined ? [t,t+Math.random()*0.2*this.max_lookahead*dt] : t_interval;
 
-			// let test_t_interval;
-			
-			// if (this.parent != undefined) {
-			// 	test_t_interval = t_interval === undefined ? [t,t+Math.random()*this.parent.df/8] : t_interval;	
-			// 	// test_t_interval = t_interval === undefined ? [t,t+this.multiplier*Math.random()*this.parent.df/4] : t_interval;	
-			// } else {
-			// 	test_t_interval = t_interval === undefined ? [t,t+Math.random()*this.max_lookahead*dt] : t_interval;
-			// }
-			
+			if (longer_demo) {
+				test_t_interval = t_interval == undefined ? [t,t+Math.random()*5*this.max_lookahead*dt] : t_interval;
+			} else {
+				test_t_interval = t_interval == undefined ? [t,t+Math.random()*0.2*this.max_lookahead*dt] : t_interval;
+			}
 
 			this.change_t(test_t_interval[0], test_t_interval[1]);
-			//this.change_t(t, t+Math.random()*this.max_lookahead*dt);
-			//this.change_t(t, dt*Math.max(-(Math.abs(this.last_df-this.df))+this.max_lookahead, dt))
 
 			let f = func(this.x_interval, this.y_interval, this.t_interval);
 			this.last_df = this.df;
@@ -909,7 +896,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 						this.filled = 0;
 					}
 					
-					//return this.filled;
+					return this.filled;
 				} else {
 
 					// if ((test_t_interval[1] - test_t_interval[0] > 10*dt && this.filled == 0)) {
@@ -955,7 +942,7 @@ function Region(xmin, xmax, ymin, ymax, tmin, tmax) {
 		}
 
 		// for (child of this.children) {
-		// 	child.eval(t);
+		// 	child.eval_mods(t);
 		// }
 
 		if (!this.is_leaf()) {
@@ -1007,8 +994,8 @@ let dt = 0.001;
 let paused = false;
 var evaluations = 0;
 
-let min_dx = 0.1;
-let min_dy = 0.1;
+let min_dx = 0.05;
+let min_dy = 0.05;
 let x_scale = 50;
 
 let domain_regions = [
