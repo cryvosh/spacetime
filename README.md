@@ -20,6 +20,6 @@ Press F12 to open the developer console.
 
 Inside, the following variables can be changes to modify the performance plotter:
 
-* x_scale, to stretch the data horizontally
+* x_scale to stretch the data horizontally
 * canvas2.x_dim to change the x-axis numbering density
 * canvas2.y_dim to change the y-axis numbering density
